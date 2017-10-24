@@ -1,6 +1,7 @@
-url = "https://www.vocabulary.com/lists/181261"
+sample_url = "https://www.vocabulary.com/lists/181261"
+lin_w = "https://www.vocabulary.com/profiles/A1F53BBSTZZTSF"
 
-def get_text_file(url):
+def get_webpage(url):
     import urllib
 
     print("\n\n attempting to open ")
