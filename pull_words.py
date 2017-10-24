@@ -2,10 +2,13 @@ url = "https://www.vocabulary.com/lists/181261"
 
 def get_text_file(url):
     import urllib
+
+    print("\n\n attempting to open ")
     response = urllib.request.urlopen(url)
     data = response.read()      # a `bytes` object
     text = data.decode('utf-8') # a `str`;
     return text
+    print("\n\n finished")
 
 
 
