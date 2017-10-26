@@ -5,7 +5,7 @@ url = "https://www.vocabulary.com/profiles/A1F53BBSTZZTSF"
 
 def get_html_text(url):
 
-    print("\n\n attempting to open ")
+    print("\n\n attempting to open " + url)
 
     # Get HTML Response From Website
     response = urlopen(url)
@@ -52,7 +52,13 @@ with open("vocab_link_list.txt", 'r') as file:
 our_links = get_links(our_html_text)
 first_link = our_links[0]
 
-# Let's Open One HTML File & Save The Contents
-html_text = get_html_text(first_link)
-with open("first_vocab_link.txt", 'w') as file:
+# We Can Do Better With A for-loop
+# Let's get ALLLL The HTML content FRom
+# All The links and Save it to one file
+html_text = ""
+
+for link in our_links:
+    html_text += get_html_text(link)
+    
+with open("all_vocab_links.txt", 'w') as file:
     file.write(html_text)
