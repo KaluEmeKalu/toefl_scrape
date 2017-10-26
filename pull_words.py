@@ -2,8 +2,7 @@ from urllib.request import urlopen
 
 url = "https://www.vocabulary.com/profiles/A1F53BBSTZZTSF"
 
-# We Turn Our Code Into A get_html_text
-# Function So That Our Code is Resuable
+
 def get_html_text(url):
 
     print("\n\n attempting to open ")
@@ -19,18 +18,37 @@ def get_html_text(url):
     return html_text
 
 
-# Create a Function that Opens and Saves
-# a text file containing
-# the html_text from the website
 def save_text_file(text, filename):
 
-    # This time we will use a different
-    # way to open a file
-    # This does the same thing
-    # but is shorter
+
     with open(filename, 'w') as f:
         f.write(text)
 
-html_text = get_html_text(url)
+
+# We Will Make A function That Gets 
+# The First Vocab Link From Len_W's 
+# Vocabulary.com profile Page
+def get_links(html_text):
+
+    text = html_text
+    link_start = "https://www.vocabulary.com/lists/"
+    link_list = []
+
+    next_word_position = text.find("wordlist shortlisting")
+
+    start_link_position = text.find("/lists/", next_word_position)
+    start_link_position += 7
+    end_link_position = text.find('"', start_link_position)
+    link = text[start_link_position: end_link_position]
+    link = link_start + link
+    link_list.append(link)
+
+    return link_list
+
+
 our_filename = "vocab_link_list.txt"
-save_text_file(html_text, our_filename)
+with open(our_filename, 'r') as file:
+    our_html_text = file.read()
+
+our_links = get_links(our_html_text)
+print(our_links)
