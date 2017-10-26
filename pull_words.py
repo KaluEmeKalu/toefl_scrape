@@ -25,8 +25,8 @@ def save_text_file(text, filename):
         f.write(text)
 
 
-# We Will Make A function That Gets 
-# The First Vocab Link From Len_W's 
+# Now We Want the First 2
+# Vocab Links From Len_W's 
 # Vocabulary.com profile Page
 def get_links(html_text):
 
@@ -36,6 +36,40 @@ def get_links(html_text):
 
     next_word_position = text.find("wordlist shortlisting")
 
+    start_link_position = text.find("/lists/", next_word_position)
+    start_link_position += 7
+    end_link_position = text.find('"', start_link_position)
+    link = text[start_link_position: end_link_position]
+    link = link_start + link
+    link_list.append(link)
+
+    ################################
+    ################################
+    #### Now Let's Get The 2nd Link
+    ################################
+    ################################
+
+    # We simply get the next word position
+    next_word_position = text.find("wordlist shortlisting", end_link_position)
+
+    # Then We Copy and paste lines 39 to line 44
+    start_link_position = text.find("/lists/", next_word_position)
+    start_link_position += 7
+    end_link_position = text.find('"', start_link_position)
+    link = text[start_link_position: end_link_position]
+    link = link_start + link
+    link_list.append(link)
+
+    ################################
+    ################################
+    #### Now Let's Get The 3rd Link
+    ################################
+    ################################
+    
+    # Just Copy And Paste Fro Line 53
+    next_word_position = text.find("wordlist shortlisting", end_link_position)
+
+    # And Again We Copy and paste lines 39 to line 44
     start_link_position = text.find("/lists/", next_word_position)
     start_link_position += 7
     end_link_position = text.find('"', start_link_position)
