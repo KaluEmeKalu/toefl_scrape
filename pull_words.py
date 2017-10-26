@@ -18,10 +18,19 @@ def get_html_text(url, filename):
     print(" finished ")
     return html_text
 
-html_text = get_html_text(url)
 
-# Open and Save a text file containing
+# Create a Function that Opens and Saves
+# a text file containing
 # the html_text from the website
-file = open("vocab_link_list.txt", "w")
-file.write(html_text)
-file.close()
+def save_text_file(text, filename):
+
+    # This time we will use a different
+    # way to open a file
+    # This does the same thing
+    # but is shorter
+    with open(filename, 'w') as f:
+        f.write(text)
+
+html_text = get_html_text(url)
+our_filename = "vocab_link_list.txt"
+save_text_file(html_text, our_filename)
