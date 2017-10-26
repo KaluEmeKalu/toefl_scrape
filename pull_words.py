@@ -46,19 +46,45 @@ def get_links(html_text):
     return link_list
 
 
-with open("vocab_link_list.txt", 'r') as file:
+# Let's Create A Script 
+# To GEt The Vocab Words 
+# And Put Them in a Dictionary
+def pull_words(text):
+
+    # Instantiate words dictionary
+    words_dict = {}
+
+    # Get Beginning Point of First Word
+    beginning = text.find('lang="en" word=')
+
+    # While loop that runs as long as we can find
+    # the string 'lang="en" word=' in our text
+    while text.find('lang="en" word=', beginning) != -1:
+
+        # Get Word Start & End Point
+        word_start_point = text.find('"', beginning + 14)
+        word_end_point = text.find('"', word_start_point + 1)
+
+        # Get Definition Start & End Point
+        start_definition = text.find('tion">', word_end_point) + 5
+        end_definition = text.find('</div>', start_definition)
+
+        # Get the Word & Definition
+        word = text[word_start_point + 1 : word_end_point]
+        word_definition = text[start_definition + 1 : end_definition]
+
+        # Add Word & Definition to Dictionary
+        words_dict[word] = [word_definition]
+
+        # Start Over Again With Beginning Point of Next Word
+        beginning = text.find('lang="en" word=', beginning + 1)
+
+    return words_dict
+
+
+
+with open("all_vocab_links.txt", 'r') as file:
     our_html_text = file.read()
 
-our_links = get_links(our_html_text)
-first_link = our_links[0]
-
-# We Can Do Better With A for-loop
-# Let's get ALLLL The HTML content FRom
-# All The links and Save it to one file
-html_text = ""
-
-for link in our_links:
-    html_text += get_html_text(link)
-    
-with open("all_vocab_links.txt", 'w') as file:
-    file.write(html_text)
+words_dict = pull_words(our_html_text)
+print(words_dict)
