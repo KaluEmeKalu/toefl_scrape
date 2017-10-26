@@ -1,12 +1,15 @@
-sample_vocab_list_url = "https://www.vocabulary.com/lists/181261"
-author_page = "https://www.vocabulary.com/profiles/A1F53BBSTZZTSF"
-url = author_page
-
 from urllib.request import urlopen
 
+url = "https://www.vocabulary.com/profiles/A1F53BBSTZZTSF"
 print("\n\n attempting to open ")
-response = urlopen(url)
-data = response.read()      # a `bytes` object
-text = data.decode('utf-8')  # a `str`;
 
+# Get HTML Response From Website
+response = urlopen(url)
+# Read HTML Response Data
+data = response.read()  # a `bytes` object
+# Convert Bytes Data into UTF-8 String
+html_text = data.decode('utf-8')  # a `str`object;
+
+print(html_text)
 print("\n\n finished")
+
