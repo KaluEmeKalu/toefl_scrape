@@ -4,7 +4,7 @@ url = "https://www.vocabulary.com/profiles/A1F53BBSTZZTSF"
 
 # We Turn Our Code Into A get_html_text
 # Function So That Our Code is Resuable
-def get_html_text(url, filename):
+def get_html_text(url):
 
     print("\n\n attempting to open ")
 
